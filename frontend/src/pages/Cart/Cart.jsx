@@ -1,75 +1,123 @@
 import React, { useContext } from 'react'
-import './Cart.css'
 import { StoreContext } from '../../components/context/StoreContext'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
 
-  const {cartItems, food_list, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
+  const { cartItems, food_list, removeFromCart, getTotalCartAmount } =
+    useContext(StoreContext)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+
   return (
-    <div className='cart'>
-      <div className="cart-items">
-        <div className="cart-items-title">
-          <p>Itmes</p>
-          <p>Title</p>
-          <p>Price</p>
-          <p>Quantity</p>
-          <p>Total</p>
-          <p>Remove</p>
-        </div>
-        <br />
-        <hr />
-        {food_list.map((item,index)=>{
-          if(cartItems[item._id]>0){
-            return <div>
-              <div className="cart-items-title cart-items-item">
-              <img src={item.image} alt="" />
-              <p>{item.name}</p>
-              <p>${item.price}</p>
-              <p>{cartItems[item._id]}</p>
-              <p>${item.price*cartItems[item._id]}</p>
-              <p onClick={()=>removeFromCart(item._id)} className='cross'>x</p>
-            </div>
-            <hr />
-            </div>
+    <div className="container my-5">
+      <h2 className="mb-4 text-center">Shopping Cart</h2>
 
-            
-          }
-        })}
+      {/* Cart Table */}
+      <div className="table-responsive">
+        <table className="table table-bordered align-middle text-center">
+          <thead className="table-dark">
+            <tr>
+              <th>Item</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Total</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {food_list.map((item) => {
+              if (cartItems[item._id] > 0) {
+                return (
+                  <tr key={item._id}>
+                    <td>
+                      <img
+                        src={item.image}
+                        alt=""
+                        style={{ width: '60px', borderRadius: '8px' }}
+                      />
+                    </td>
+                    <td>{item.name}</td>
+                    <td>${item.price}</td>
+                    <td>{cartItems[item._id]}</td>
+                    <td>${item.price * cartItems[item._id]}</td>
+                    <td>
+                      <button
+                        className="btn btn-sm btn-danger"
+                        onClick={() => removeFromCart(item._id)}
+                      >
+                        ✕
+                      </button>
+                    </td>
+                  </tr>
+                )
+              }
+            })}
+          </tbody>
+        </table>
       </div>
-      <div className="cart-bottom">
-        <div className="cart-total">
-          <h2>Cart Total</h2>
-          <div>
-            <div className="cart-total-detail">
-              <p>Subtotal</p>
-              <p>${getTotalCartAmount()}</p>
+
+      {/* Bottom Section */}
+      <div className="row mt-5">
+        {/* Cart Total */}
+        <div className="col-md-6 mb-4">
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <h4 className="card-title mb-3">Cart Total</h4>
+
+              <div className="d-flex justify-content-between">
+                <span>Subtotal</span>
+                <span>${getTotalCartAmount()}</span>
+              </div>
+              <hr />
+
+              <div className="d-flex justify-content-between">
+                <span>Delivery Fee</span>
+                <span>${getTotalCartAmount() === 0 ? 0 : 2}</span>
+              </div>
+              <hr />
+
+              <div className="d-flex justify-content-between fw-bold">
+                <span>Total</span>
+                <span>
+                  $
+                  {getTotalCartAmount() === 0
+                    ? 0
+                    : getTotalCartAmount() + 2}
+                </span>
+              </div>
+
+              <button
+                className="btn btn-success w-100 mt-4"
+                onClick={() => navigate('/order')}
+              >
+                Proceed to Checkout
+              </button>
             </div>
-            <hr />
-            <div className="cart-total-detail">
-              <p>Delivery Fee</p>
-              <p>${getTotalCartAmount()===0?0:2}</p>
-            </div>
-            <hr />
-            <div className="cart-total-detail">
-              <b>Total</b>
-              <b>${getTotalCartAmount()===0?0:getTotalCartAmount()+2}</b>
-            </div> 
           </div>
-          <button onClick={()=> navigate('/order')}>PROCEED TO CHECKOUT</button>
         </div>
-        <div className="cart-promocode">
-          <div>
-            <p>If you have a promo code, enter it here</p>
-            <div className='cart-promocode-input'>
-              <input type="text" placeholder='Promo Code'/>
-              <button>Submit</button>
+
+        {/* Promo Code */}
+        <div className="col-md-6">
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <h5 className="mb-3">Have a Promo Code?</h5>
+
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter promo code"
+                />
+                <button className="btn btn-primary">Apply</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   )
 }

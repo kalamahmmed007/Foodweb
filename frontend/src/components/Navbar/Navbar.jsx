@@ -49,9 +49,9 @@ const Navbar = ({ setShowLogin }) => {
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4 text-center">
               {[
                 { name: "Home", path: "/" },
-                { name: "Menu", path: "/menu" },
-                { name: "Mobile App", path: "/mobile-app" },
-                { name: "Contact", path: "/contact-us" },
+                { name: "Menu", path: "#menu" },
+                { name: "Mobile App", path: "#mobile-app" },
+                { name: "Contact", path: "#contact-us" },
               ].map((item) => (
                 <li className="nav-item" key={item.name}>
                   <NavLink
