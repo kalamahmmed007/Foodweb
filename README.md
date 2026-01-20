@@ -1,4 +1,3 @@
-# Foodweb
 # Foodweb 🍔🛵
 
 Foodweb is a full-stack **Food Delivery Web Application** built with **MERN stack** (MongoDB, Express, React, Node.js). It allows users to browse restaurants, place orders, and track them in real-time, while admins can manage orders, products, and view dashboards.
@@ -8,12 +7,16 @@ Foodweb is a full-stack **Food Delivery Web Application** built with **MERN stac
 ## Features ✨
 
 ### User Side
+<img width="950" height="895" alt="image" src="https://github.com/user-attachments/assets/85bffdb5-49e8-4322-b320-e03ad7430724" />
+
 - Browse restaurants and menus
 - Add items to cart & place orders
 - Track order status in real-time
 - Responsive design for mobile & desktop
 
 ### Admin Side
+<img width="1902" height="870" alt="image" src="https://github.com/user-attachments/assets/ddf6d7e8-3e76-4aee-9ee2-b7fc0253c740" />
+
 - Dashboard with live stats
 - Manage orders, users, and products
 - Pie charts & graphs for order & sales analysis
